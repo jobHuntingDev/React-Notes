@@ -47,7 +47,7 @@ export default Component() {
 
 In App.css
 
-```javascript
+```css
 .App{
 	background-color: blue;
 }
@@ -56,6 +56,72 @@ In App.css
 Note: App not app. all elements must have a closing tag.
 
 ## What is JSX_ Creating Components in React.mp4
+
+In App.jsx
+
+```javascript
+import "./App.css"
+
+function RandomImage() {
+	return <img src="https://picsum.photos/200/300" alt="random" />
+}
+
+function App() {
+
+ const now = new Date().toString()
+
+ return (
+	<>
+		<div className="App">
+			<h1>Hello World</h1>
+			<p>{6 + 9}</p>
+			<p>{now}</p>	
+		</div>
+		<p>Some more text</p>
+
+		<RandomImage />
+		<RandomImage />
+		<RandomImage />
+	</>
+ )
+}
+```
+Component in external file(RandomImage.jsx)
+
+```javascript
+export default function RandomImage() {
+	return <img src="https://picsum.photos/200/300" alt="random" />
+}
+```
+
+Importing the component
+
+```javascript
+import "./App.css"
+import 	RandomImage from "./RandomImage.jsx"
+
+
+function App() {
+
+ const now = new Date().toString()
+
+ return (
+	<>
+		<div className="App">
+			<h1>Hello World</h1>
+			<p>{6 + 9}</p>
+			<p>{now}</p>	
+		</div>
+		<p>Some more text</p>
+
+		<RandomImage />
+		<RandomImage />
+		<RandomImage />
+	</>
+ )
+}
+```
+
 ## React Props Explained.mp4
 ## Rendering a List of Components.mp4
 ## This Is How You Handle Events In A React App.mp4
