@@ -123,6 +123,62 @@ function App() {
 ```
 
 ## React Props Explained.mp4
+
+Props: for when you want to use the same component more than once but change the data of the component.It's how we pass a component data. 
+
+For Example:
+
+App.jsx file
+
+```python
+import "./App.css"
+import Joke from "./Joke.jsx"
+
+function App(){
+
+	const dadJoke2 = {
+		joke: "I'm afraid for calendar. Its days are numberd.",
+		rating: 4
+	}
+	
+	return (
+		<div>
+			<h1>Dat Jokes</h1>
+			
+			<Joke rating={3} joke="I used to be a banker, but then I lost interest!" />
+			<Joke joke={dadJoke2.joke} rating={dadJOke2.rating} />
+			<Joke {...dadJoke2} />
+		</div>
+	)
+}
+```
+
+The component
+
+```javascript
+export default function Joke(props){
+
+	return (
+		<div>
+			<p>{props.joke}</p>
+			<p>{props.rating}</p>
+		</div>
+	)
+}
+
+// OR
+
+//export default function Joke({ rating, joke}){
+//
+//	return (
+//		<div>
+//			<p>{joke}</p>
+//			<p>{rating}</p>
+//		</div>
+//	)
+//}
+```
+
 ## Rendering a List of Components.mp4
 ## This Is How You Handle Events In A React App.mp4
 ## useState.mp4
