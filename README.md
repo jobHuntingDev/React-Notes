@@ -143,7 +143,7 @@ function App(){
 	
 	return (
 		<div>
-			<h1>Dat Jokes</h1>
+			<h1>Dad Jokes</h1>
 			
 			<Joke rating={3} joke="I used to be a banker, but then I lost interest!" />
 			<Joke joke={dadJoke2.joke} rating={dadJOke2.rating} />
@@ -180,7 +180,134 @@ export default function Joke(props){
 ```
 
 ## Rendering a List of Components.mp4
+
+```javascript
+import "./App.css"
+import Joke from "./Joke.jsx"
+
+function App(){
+
+	jokes = [
+		{
+			id: 1,
+			joke: "I'm afraid for calendar. Its days are numberd.",
+			rating: 4
+		},
+		{
+			id: 2,
+			joke: "I'm afraid for calendar. Its days are numberd.",
+			rating: 4
+		},
+		{
+			id: 3,
+			joke: "I'm afraid for calendar. Its days are numberd.",
+			rating: 4
+		},
+		{
+			id: 4,
+			joke: "I'm afraid for calendar. Its days are numberd.",
+			rating: 4
+		},
+		{
+			id: 5,
+			joke: "I'm afraid for calendar. Its days are numberd.",
+			rating: 4
+		},
+	]
+
+	jokeComponents = jokes.filter(joke => joke.rating > 3).map(joke => (
+		<Joke key={joke.id} joke={joke.joke} rating={joke.rating} />
+	))
+	
+	return (
+		<div>
+			<h1>Dad Jokes</h1>
+			
+			{jokeComponents}
+		</div>
+	)
+}
+```
+
 ## This Is How You Handle Events In A React App.mp4
+
+```javascript
+import "./App.jsx"
+
+function App() {
+	function handleClick(){
+		console.log("Button Clicked")
+	}
+	
+	function handleSubmit(e) {
+		e.preventDefault()
+		console.log("Form submitted")
+	}
+
+	function handleTextChange(e) {
+		console.log(e.target.value)
+	}
+
+	return (
+		<div className="App">
+			<button onClick={handleClick}>Do Something</button>
+
+			<form onSubmit={handleSubmit}>
+				<input type="text" oneChange={handleTextChange} />
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	)
+}
+```
+
+Passing event handling function to custom component
+
+```javascript
+import "./App.jsx"
+
+import Form from "./Form.jsx"
+
+function App() {
+	function handleClick(){
+		console.log("Button Clicked")
+	}
+	
+	function handleSubmit(e) {
+		console.log("Form submitted")
+	}
+
+	function handleTextChange(e) {
+		console.log(e.target.value)
+	}
+
+	return (
+		<div className="App">
+			<button onClick={handleClick}>Do Something</button>
+
+			<Form onSubmit={handleSubmit} />
+		</div>
+	)
+}
+```
+in Form.jsx
+```javascript
+export default function Form({onSubmit}) {
+
+	function handleSubmit(e) {	
+		e.preventDefault()
+		onSubmit()
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<input type="text" />
+			<button type="submit">Submit</button>	
+		</form>
+	)
+}
+```
+
 ## useState.mp4
 ## React State Array of Objects.mp4
 ## useReducer.mp4
