@@ -309,6 +309,62 @@ export default function Form({onSubmit}) {
 ```
 
 ## useState.mp4
+
+In the component file Joke.jsx. The components stores it's own likes value which it can change.
+
+```python
+import { useState } from 'react'
+
+export default function Joke({ id, text }){
+
+ const [ likes, setlike ] = useState(0)
+ const [dislikes, setDislike] = useState(0)
+
+ const handleLike = () => {
+	setLike(likes + 1)
+	console.log(`like id: ${id}, totalLikesi ${likes}`
+ }
+
+ const handleDisLike = () => {
+	setDislike(likes - 1)
+	console.log(`dislike id: ${id}, totalLikesi ${likes}`
+ }
+
+ return (
+	<div>
+		<p>{text}</p>
+		<p>Likes: {likes - dislikes}</p>
+		<button onClick={handleLike}>thumbUP</button>
+		<button onClick={handleDisLike}>thumbDown</button>
+	</div>
+ )
+}
+```
+
+Managing state of a form
+
+```python
+import { useState } from "react"
+
+export default function JokeForm({ onNewJoke}){
+
+	const [text, setText] = useState("")
+
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		onNewJoke(text)
+		setText("")
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<input type="text" value={text} placeholder="Enter a joke" onChange={e => setText(e.target.value)} />
+			<button type="submit">Submit</button>
+		</form>
+	)
+}
+```
+
 ## React State Array of Objects.mp4
 ## useReducer.mp4
 ## Conditional Rendering Components in React.mp4
