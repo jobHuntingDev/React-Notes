@@ -365,9 +365,152 @@ export default function JokeForm({ onNewJoke}){
 }
 ```
 
-## React State Array of Objects.mp4
+## React State of Array and Objects.mp4
+
+Mannaging Arrays using state
+
+App.jsx
+
+```javascript
+import './App.css'
+import Joke from './Joke'
+import JokeForm from './JokeForm'
+
+function App() {
+	// use state
+	const [jokes, setJokes] = useState([
+		{
+			id: 1,
+			text; "I'm afraid for the calendar. Its days are numbered."
+		},
+		{
+			id: 2,
+			text; "I used to be addicted to soap, but I'm clean now."	
+		}
+	])
+
+
+	// Add new joke object
+	// Create a new array with the new joke + old joke array
+	const handleAddJoke = (text) => {
+		setJokes([joke, ...jokes])
+		console.log("New joke created")
+	}
+
+	const handleDeleteJoke = (id) =>{
+		setJokes(jokes.filter(joke => joke.id !== id))
+		console.log("deleted joke", id)
+	}
+
+	return (
+		<div>
+			<h1>Dad Jokes</h1>
+		
+			<JokeForm onAddJoke={handleAddJoke} />
+	
+			{jokes.map(joke => (
+				<Joke onDelete={handleDeleteJoke} key={joke.id} id={joke.id} text={joke.text} />
+			))}
+		</div>
+	)
+}
+
+export default App
+```
+
+Joke.jsx
+
+```javascript
+import {useState} from "react"
+
+export default function Joke({ id, text, onDelete , onLike, onDelte}) {
+	const [likes, setLikes] = useState(0)
+
+	 const handleLike = () => {
+		setLike(likes + 1)
+		console.log(`like id: ${id}, totalLikesi ${likes}`
+ 	}
+
+ 	const handleDisLike = () => {
+		setDislike(likes - 1)
+		console.log(`dislike id: ${id}, totalLikesi ${likes}`
+ 	}
+
+	return (
+		<div>
+			<p>{text}</p>
+			<p>Likes: {likes}</p>
+			<button onClick={handleLike}>like<button>
+			<button onClick={handleDislike}>dislike<button>	
+			<button onClick={() => onDelete(id)}>delete<button>
+		</div>
+	)
+}
+
+```
+
+## Using Require to render images
+
+```javascript
+import React from "react";
+
+function House() {
+	return (
+		<div className="App">
+			<img src={require("./house.jpg")} alt="House image" />	
+		</div>
+	)
+}
+```
+
 ## useReducer.mp4
+
+```javascript
+import React, { useReducer } from "react"
+
+const ACTIONS = {
+	INCREMENT: "increment",
+	DECREMENT: "decrement"
+}
+
+function reducer(state, action){
+	swith(action.type){
+		case ACTIONS.INCREMENT:
+			return ( count: state.count + 1 )
+		case ACTIONS.DECREMENT:
+			return ( count: state.count - 1 )
+		default:
+			return state
+	}
+}
+
+export default function App() {
+	const [state, dispatch] = useReducer(reducer, { count: 0 })
+
+	function increment() {
+		dispatch({ type: ACTIONS.INCREMENT})
+	)
+
+	function decrement() {
+		dispatch({ type: ACTIONS.DECREMENT)
+	)
+
+	return (
+		<>
+			<button onClick={decrement}> -</button>
+			<span>{state.count}</span>
+			<button onClick={increment}> -</button>
+		</>
+	)
+
+}
+```
+
 ## Conditional Rendering Components in React.mp4
+
+```javascript
+```
+
 ## useEffect Everything You Need To Know.mp4
 ## Fetching and Posting Data in React.mp4
 ## React Proxy _ Easiest Fix to CORS Errors.mp4
