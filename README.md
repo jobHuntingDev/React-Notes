@@ -509,9 +509,72 @@ export default function App() {
 ## Conditional Rendering Components in React.mp4
 
 ```javascript
+import './App.css'
+import Joke from './Joke'
+import JokeForm from './JokeForm'
+
+function App() {
+	const [jokes, setJokes] = useState([
+		{
+			id: 1,
+			text; "I'm afraid for the calendar. Its days are numbered."
+		},
+		{
+			id: 2,
+			text; "I used to be addicted to soap, but I'm clean now."	
+		}
+	])
+
+	// Form state
+	const [showForm, setShowForm] =useState(false)
+
+
+	const handleAddJoke = (text) => {
+		setJokes([joke, ...jokes])
+		console.log("New joke created")
+	}
+
+	const handleDeleteJoke = (id) =>{
+		setJokes(jokes.filter(joke => joke.id !== id))
+		console.log("deleted joke", id)
+	}
+
+	const handleAddNewJoke = () => {
+		setShowForm(true)
+	}
+
+	// Determine what gets renderd
+
+	let jsx = null
+	if(showForm) {
+		jsx = <JokeForm onAddJoke={handleAddJoke} />
+	}
+	else {	
+		jsx = (
+			<>
+				<button onClick={handleAddNewJoke}>Add a new joke</button>
+				{jokes.map(joke => (
+					<Joke onDelete={handleDeleteJoke} key={joke.id} id={joke.id} text={joke.text} />
+				))}
+			</>
+		)
+	}
+
+	return (
+		<div>
+			<h1>Dad Jokes</h1>	
+			{jsx}	
+		</div>
+	)
+}
 ```
 
 ## useEffect Everything You Need To Know.mp4
+
+```javascript
+
+```
+
 ## Fetching and Posting Data in React.mp4
 ## React Proxy _ Easiest Fix to CORS Errors.mp4
 ## Build a web app with React, Express, Mysql, S3, Heroku _ Live Lesson Demo.mp4
