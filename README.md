@@ -571,11 +571,95 @@ function App() {
 
 ## useEffect Everything You Need To Know.mp4
 
-```javascript
+Used to cause an effect when something happen(when you click a button for example)
 
+Write a console log that only happend when a state resource changes.
+
+```javascript
+import React, { useState, useEffect } from "react"
+
+export default function App() {
+	const [resourceType, setResourceType] = useState("posts")
+
+	console.log("render")
+
+	useEffect(() => {
+		// Runs everytime resourceType changes
+		console.log("resouce type changed")
+	}, [resourceType])
+
+	return (
+		<>
+			<div>
+				<button onClick={() => setResourceType("posts")}>Posts</button>
+				<button onClick={() => setResourceType("users")}>Users</button>
+				<button onClick={() => setResourceType("comments")}>Comments</button>
+			</div>
+			<h1>{resourceType}</h1>
+		</>
+	)
+}
+```
+
+How to clean up after yourself
+
+```javascript
+import React, { useState, useEffect } from "react"
+
+export default function App() {
+	const [resourceType, setResourceType] = useState("posts")
+
+	console.log("render")
+
+	useEffect(() => {
+		// Runs after clean up
+		console.log("resouce type changed")
+	
+		// Runs first to clean up
+		return () => {
+			console.log("return from resource change")
+		}
+	}, [resourceType])
+
+	return (
+		<>
+			<div>
+				<button onClick={() => setResourceType("posts")}>Posts</button>
+				<button onClick={() => setResourceType("users")}>Users</button>
+				<button onClick={() => setResourceType("comments")}>Comments</button>
+			</div>
+			<h1>{resourceType}</h1>
+		</>
+	)
+}
 ```
 
 ## Fetching and Posting Data in React.mp4
+
+Using fetch
+
+```javascript
+fetch("https://regres.im/api/users", {
+ method: "POST",
+ headers: {
+	"Content-Type": "application/json"
+ },
+ body: JSON.stringify{
+	name: "User 1"
+ }
+})
+ .then(res => { 
+
+ if(res.ok){
+  console.log("SUCCESS")
+ } else {
+  console.log("Not Successful")
+ }
+ res.json()
+ })
+ .then(data => console.log(data))
+```
+
 ## React Proxy _ Easiest Fix to CORS Errors.mp4
 ## Build a web app with React, Express, Mysql, S3, Heroku _ Live Lesson Demo.mp4
 ## Deploy React App to S3 with Custom Domain.mp4
